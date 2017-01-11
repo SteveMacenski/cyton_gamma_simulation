@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 from sensor_msgs.msg import JointState
 import copy
@@ -27,8 +29,6 @@ class CytonMotion():
         self.display_trajectory_publisher = rospy.Publisher(
                 '/move_group/display_planned_path',
                 moveit_msgs.msg.DisplayTrajectory,queue_size=10)
-        self.group.set_end_effector_link(
-                            "wrist_roll")
         self.gripper_publisher = rospy.Publisher(
                 '/gripper_position_controller/command',
                 Float64,queue_size=10)

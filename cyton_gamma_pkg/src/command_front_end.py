@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 from sensor_msgs.msg import JointState
 import copy

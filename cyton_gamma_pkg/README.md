@@ -21,17 +21,17 @@ Here are the python tests of a trajectory generation program, front-end, and pat
 
 Will attempt to launch all of the launch scripts for a full launch making it easier on the user. It currently has some bugs resulting in a 50% success rate. 
 
-> python command_front_end.py 2>/dev/null
+> rosrun cyton_gamma_pkg command_front_end.py 2>/dev/null
 
 Will launch the front-end with accompanying OMPL/MoveIt planning backend class in robot_planning_class.py. 
 
-> python feedback_front_end.py 2>/dev/null
+> rosrun cyton_gamma_pkg feedback_front_end.py 2>/dev/null
 
 Will launch the front-end with feedback information from the robot and E-STOP capabilities.
 
 If you prefer a single front-end with all capabilities, this will do that and will include velocity control.
 
-> python combined_front_end.py
+> rosrun cyton_gamma_pkg combined_front_end.py 2>/dev/null
 
 *This front-end is highly recommended*
 

@@ -12,11 +12,11 @@ Syntax for hardware:
 
 Then, an optional front-end, either a combined front-end or the separate command and feedback ones.
 
-> python combined_front_end.py 2>/dev/null
+> rosrun cyton_gamma_pkg combined_front_end.py 2>/dev/null
 
-> python command_front_end.py 2>/dev/null
+> rosrun cyton_gamma_pkg command_front_end.py 2>/dev/null
 
-> python feedback_front_end.py 2>/dev/null
+> rosrun cyton_gamma_pkg feedback_front_end.py 2>/dev/null
 
 OR Use this shell script, though currently not totally stable. If you try twice and doesn't work, go back to manual launching. Something in the dynamixel drivers doesn't make this happy. In cyton_gamma_pkg/src.
 

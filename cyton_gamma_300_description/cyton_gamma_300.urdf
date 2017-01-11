@@ -361,6 +361,9 @@
   </joint>
   <link name="virtual_endeffector">
     <visual>
+        <!-- places the point to plan for in middle of wrist roll -->
+        <!-- xyz should be offest by gripper size if center -->
+        <!-- of gripper is desired -->
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <sphere radius="0.002"/>
