@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from __future__ import division 
 import sys
 from sensor_msgs.msg import JointState
 import copy
@@ -12,6 +12,11 @@ import PyQt4
 import tf
 from math import degrees, radians
 from actionlib_msgs.msg import GoalID
+
+#take commandline or launch file param for mainpulation group
+#and gripper gorups
+#TODO
+#change to gripper group for release version
 
 class CytonMotion():
 
@@ -26,6 +31,7 @@ class CytonMotion():
         self.group.set_goal_position_tolerance(0.001)
         self.group.set_goal_orientation_tolerance(0.01)
         self.group.allow_replanning(True)
+        self.num_joints = len(self.group.get_active_joints())
         self.display_trajectory_publisher = rospy.Publisher(
                 '/move_group/display_planned_path',
                 moveit_msgs.msg.DisplayTrajectory,queue_size=10)
@@ -138,32 +144,20 @@ class CytonMotion():
 
         self.group.clear_pose_targets()
 
-        if len(angles) > 5:
+        try:
             #get
             group_variable_values = \
-                   self.group.get_current_joint_values()
+             self.group.get_current_joint_values()
 
             #set
-            group_variable_values[0] = angles[0]
-            group_variable_values[1] = angles[1]
-            group_variable_values[2] = angles[2]
-            group_variable_values[3] = angles[3]
-            group_variable_values[4] = angles[4]
-            group_variable_values[5] = angles[5]
-            group_variable_values[6] = angles[6]
+            for i in range(self.num_joints):
+                group_variable_values[i] = angles[i]
 
             self.group.set_joint_value_target(
                         group_variable_values)
 
-        else:
-
-            #sets
-            pose_target = geometry_msgs.msg.Pose()
-            pose_target.orientation.w = angles[0]
-            pose_target.position.x = angles[1]
-            pose_target.position.y = angles[2]
-            pose_target.position.z = angles[3]
-            self.group.set_pose_target(pose_target)
+        except:
+            print "cannot set angles"
 
         try:
             # plan and velocity control
@@ -184,32 +178,20 @@ class CytonMotion():
 
         self.group.clear_pose_targets()
 
-        if len(angles) > 5:
+        try:
             #get
             group_variable_values = \
              self.group.get_current_joint_values()
 
             #set
-            group_variable_values[0] += angles[0]
-            group_variable_values[1] += angles[1]
-            group_variable_values[2] += angles[2]
-            group_variable_values[3] += angles[3]
-            group_variable_values[4] += angles[4]
-            group_variable_values[5] += angles[5]
-            group_variable_values[6] += angles[6]
+            for i in range(self.num_joints):
+                group_variable_values[i] = angles[i]
 
             self.group.set_joint_value_target(
                         group_variable_values)
 
-        else:
-
-            #sets
-            pose_target = geometry_msgs.msg.Pose()
-            pose_target.orientation.w = angles[0]
-            pose_target.position.x += angles[1]
-            pose_target.position.y += angles[2]
-            pose_target.position.z += angles[3]
-            self.group.set_pose_target(pose_target)
+        except:
+            print "cannot set angles"
 
         try:
             # plan and velocity control
@@ -253,7 +235,6 @@ class CytonMotion():
         n_points = len(plan.joint_trajectory.points)
 
         spd = self.velScale
-        print spd
 
         for i in range(n_points):
             new_traj.joint_trajectory.points[i].time_from_start = \

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from __future__ import division 
 import sys
 from sensor_msgs.msg import JointState
 import copy
@@ -14,7 +14,7 @@ from math import degrees, radians
 import rviz
 import robot_planning_class
 import threading
-
+import os
 
 class feedback(PyQt4.QtCore.QThread):
 
@@ -62,10 +62,10 @@ class CommandCenter(PyQt4.QtGui.QMainWindow):
                 self.rob = sys.argv[1]
             else:
                 print "Not a robot, please specify 300 or 1500"
-                sys.exit()
+                os_exit(1)
         else:
             print "No Robot specified, please specify 300 or 1500"
-            sys.exit()
+            os._exit(1)
 
         #make window and initialize ROS node
         PyQt4.QtGui.QWidget.__init__(self, parent)
@@ -459,13 +459,26 @@ class CommandCenter(PyQt4.QtGui.QMainWindow):
         pose = info[1]
         Euler = info[2]
 
-        self.currentR1.setText(str(round(degrees(states[4]),2)))
-        self.currentR2.setText(str(round(degrees(states[0]),2)))
-        self.currentR3.setText(str(round(degrees(states[6]),2)))
-        self.currentR4.setText(str(round(degrees(states[5]),2)))
-        self.currentR5.setText(str(round(degrees(states[3]),2)))
-        self.currentR6.setText(str(round(degrees(states[1]),2)))
-        self.currentR7.setText(str(round(degrees(states[2]),2)))
+        if self.rob == '1500':
+            #ordering of joints recieved for 300 and 1500
+
+            self.currentR1.setText(str(round(degrees(states[4]),2)))
+            self.currentR2.setText(str(round(degrees(states[0]),2)))
+            self.currentR3.setText(str(round(degrees(states[6]),2)))
+            self.currentR4.setText(str(round(degrees(states[5]),2)))
+            self.currentR5.setText(str(round(degrees(states[3]),2)))
+            self.currentR6.setText(str(round(degrees(states[1]),2)))
+            self.currentR7.setText(str(round(degrees(states[2]),2)))
+
+        else:
+  
+            self.currentR1.setText(str(round(degrees(states[5]),2)))
+            self.currentR2.setText(str(round(degrees(states[0]),2)))
+            self.currentR3.setText(str(round(degrees(states[4]),2)))
+            self.currentR4.setText(str(round(degrees(states[6]),2)))
+            self.currentR5.setText(str(round(degrees(states[3]),2)))
+            self.currentR6.setText(str(round(degrees(states[1]),2)))
+            self.currentR7.setText(str(round(degrees(states[2]),2)))
 
         self.currentX.setText(str(round(pose.position.x,2)))
         self.currentY.setText(str(round(pose.position.y,2)))
@@ -495,6 +508,11 @@ class CommandCenter(PyQt4.QtGui.QMainWindow):
             scale = 0.1
 
         self.action.changeVelocityScaling(scale)
+
+
+    def closeEvent(self, event):
+        #close all threads cleanly
+        os._exit(1)
 
 
 if __name__ == "__main__":

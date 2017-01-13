@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from __future__ import division 
 import sys
 from sensor_msgs.msg import JointState
 import copy
