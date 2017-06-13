@@ -61,7 +61,13 @@
         <mesh filename="package://cyton_gamma_1500_description/meshes/shoulder_roll.dae"/>
       </geometry>
     </visual>
-
+    <collision>
+      <origin xyz="0.0 0.0 0.05"/>
+      <geometry>
+	
+        <box size="0.09829 0.046 0.08392"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="50.0"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -97,7 +103,13 @@
         <mesh filename="package://cyton_gamma_1500_description/meshes/shoulder_pitch.dae"/>
       </geometry>
     </visual>
-
+    <collision>
+      <origin xyz="-0.02 0.0 0.0"/>
+      <geometry>
+	<sphere radius="0.055"/>
+        <!--box size="0.098 0.08 0.11"/-->
+      </geometry>
+    </collision>
     <inertial>
       <mass value="20.0"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -133,7 +145,13 @@
         <mesh filename="package://cyton_gamma_1500_description/meshes/shoulder_yaw.dae"/>
       </geometry>
     </visual>
-
+    <collision>
+      <origin xyz=" -0.002 0.02 -0.01"/>
+      <geometry>
+	<sphere radius="0.055"/>
+        <!--box size="0.08 0.1 0.11"/-->
+      </geometry>
+    </collision>
     <inertial>
       <mass value="10.0"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -169,7 +187,13 @@
         <mesh filename="package://cyton_gamma_1500_description/meshes/elbow_pitch.dae"/>
       </geometry>
     </visual>
-
+    <collision>
+      <origin xyz="-0.022 0.0 -0.006"/>
+      <geometry>
+	<sphere radius="0.055"/>
+        <!--box size="0.09 0.1 0.11"/-->
+      </geometry>
+    </collision>
     <inertial>
       <mass value="10.0"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -205,7 +229,12 @@
         <mesh filename="package://cyton_gamma_1500_description/meshes/elbow_yaw.dae"/>
       </geometry>
     </visual>
-
+    <collision>
+      <origin xyz="0.0 0.025 0.0"/>
+      <geometry>
+	<sphere radius="0.05"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="10.0"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -241,7 +270,12 @@
         <mesh filename="package://cyton_gamma_1500_description/meshes/wrist_pitch.dae"/>
       </geometry>
     </visual>
-
+    <collision>
+      <origin xyz="-0.02 0.0 0.0"/>
+      <geometry>
+	<box size="0.07 0.06 0.11"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="10.0"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -277,7 +311,12 @@
         <mesh filename="package://cyton_gamma_1500_description/meshes/wrist_roll.dae"/>
       </geometry>
     </visual>
-
+    <collision>
+      <origin xyz="0.0 0.008 0.04"/>
+      <geometry>	
+        <box size="0.08 0.06 0.08"/>
+      </geometry>
+    </collision>
     <inertial>
       <mass value="10.0"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -331,5 +370,4 @@
     </link>
 
 </robot>
-
 
